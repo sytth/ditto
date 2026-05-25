@@ -2,7 +2,6 @@ import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
-import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -16,11 +15,18 @@ const io = new Server(server, {
   },
 });
 
-const prisma = new PrismaClient();
+import prisma from './db';
+import userRoutes from './routes/userRoutes';
+import musicRoutes from './routes/musicRoutes';
+
 const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
+
+// 註冊 API 路由
+app.use('/api/users', userRoutes);
+app.use('/api/music', musicRoutes);
 
 // 基礎健康檢查路由
 app.get('/health', (req, res) => {
