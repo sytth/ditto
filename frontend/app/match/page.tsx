@@ -144,8 +144,8 @@ export default function MatchLobby() {
 
   // 前往聊天室 (第五階段實作)
   const handleGoToChat = () => {
-    alert('聊天室功能將於「第五階段：即時聊天與 48 小時倒數」實作，敬請期待！');
     setShowMatchOverlay(false);
+    router.push(`/chats/${createdMatchId}`);
   };
 
   if (loading) {
@@ -167,9 +167,14 @@ export default function MatchLobby() {
         {/* 頂部標題列 */}
         <header className={styles.header}>
           <div className={styles.logo} onClick={handleGoBack}>Ditto</div>
-          <button className={styles.backBtn} onClick={handleGoBack}>
-            返回大廳
-          </button>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button className={styles.backBtn} onClick={() => router.push('/chats')}>
+              收件匣
+            </button>
+            <button className={styles.backBtn} onClick={handleGoBack}>
+              返回大廳
+            </button>
+          </div>
         </header>
 
         {error ? (

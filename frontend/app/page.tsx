@@ -132,14 +132,19 @@ export default function Home() {
         {/* 導覽列 */}
         <header className={styles.nav}>
           <div className={styles.logo}>Ditto</div>
-          {user && (
-            <div className={styles.userInfo}>
-              <span className={styles.userName}>{user.name}</span>
-              <button className={styles.logoutBtn} onClick={handleLogout}>
-                登出
-              </button>
-            </div>
-          )}
+          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+            <button className={styles.backBtn} style={{ background: 'rgba(255, 255, 255, 0.1)', border: 'none', color: '#fff', padding: '8px 16px', borderRadius: '10px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 600 }} onClick={() => router.push('/chats')}>
+              收件匣 (Inbox)
+            </button>
+            {user && (
+              <div className={styles.userInfo}>
+                <span className={styles.userName}>{user.name}</span>
+                <button className={styles.logoutBtn} onClick={handleLogout}>
+                  登出
+                </button>
+              </div>
+            )}
+          </div>
         </header>
 
         {error ? (

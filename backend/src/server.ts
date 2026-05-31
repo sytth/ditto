@@ -15,10 +15,13 @@ const io = new Server(server, {
   },
 });
 
+app.set('io', io);
+
 import prisma from './db';
 import userRoutes from './routes/userRoutes';
 import musicRoutes from './routes/musicRoutes';
 import matchRoutes from './routes/matchRoutes';
+import chatRoutes from './routes/chatRoutes';
 
 const PORT = process.env.PORT || 4000;
 
@@ -29,6 +32,7 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/music', musicRoutes);
 app.use('/api/matches', matchRoutes);
+app.use('/api/chats', chatRoutes);
 
 // 基礎健康檢查路由
 app.get('/health', (req, res) => {
