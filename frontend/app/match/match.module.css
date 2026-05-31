@@ -1,0 +1,449 @@
+.container {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #0d0b18 0%, #040306 100%);
+  color: #f1f1f7;
+  font-family: var(--font-geist-sans), sans-serif;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 15px;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.backBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.backBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cardContainer {
+  position: relative;
+  width: 100%;
+  height: 580px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 25px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+  user-select: none;
+}
+
+/* 契合度徽章 */
+.scoreBadge {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  box-shadow: 0 5px 15px rgba(167, 139, 250, 0.3);
+}
+
+.cardHeader {
+  margin-top: 15px;
+}
+
+.name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.cardName {
+  font-size: 0.95rem;
+  color: #a78bfa;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.songList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+  flex: 1;
+  justify-content: center;
+}
+
+.songItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.songItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.coverWrapper {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.playOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.coverWrapper:hover .playOverlay,
+.coverWrapperActive .playOverlay {
+  opacity: 1;
+}
+
+.playIcon, .pauseIcon {
+  width: 12px;
+  height: 12px;
+  background: #fff;
+}
+
+.playIcon {
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.pauseIcon {
+  display: flex;
+  justify-content: space-between;
+  background: none;
+}
+
+.pauseIcon::before, .pauseIcon::after {
+  content: '';
+  width: 4px;
+  height: 12px;
+  background: #fff;
+}
+
+.songInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.songName {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artistName {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tagGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.actionContainer {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.actionBtn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.actionBtn:hover {
+  transform: scale(1.1);
+}
+
+.skipBtn {
+  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid rgba(239, 68, 68, 0.4);
+}
+
+.skipBtn:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+}
+
+.likeBtn {
+  background: rgba(16, 185, 129, 0.1);
+  border: 2px solid rgba(16, 185, 129, 0.4);
+}
+
+.likeBtn:hover {
+  background: #10b981;
+  border-color: #10b981;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+}
+
+/* 按鈕內圖示 */
+.skipIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.skipIcon::before, .skipIcon::after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background: #ef4444;
+  transition: background 0.2s;
+}
+.skipIcon::before { transform: rotate(45deg); }
+.skipIcon::after { transform: rotate(-45deg); }
+
+.skipBtn:hover .skipIcon::before,
+.skipBtn:hover .skipIcon::after {
+  background: #fff;
+}
+
+.likeIcon {
+  position: relative;
+  width: 22px;
+  height: 20px;
+}
+/* 心型圖示（用 CSS 繪製避免外部依賴與 Emoji） */
+.likeIcon::before,
+.likeIcon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 12px;
+  height: 19px;
+  border-radius: 10px 10px 0 0;
+  background: #10b981;
+  transition: background 0.2s;
+}
+.likeIcon::before {
+  left: 11px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+.likeIcon::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+.likeBtn:hover .likeIcon::before,
+.likeBtn:hover .likeIcon::after {
+  background: #fff;
+}
+
+.emptyState {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 28px;
+  padding: 40px;
+  text-align: center;
+  color: #64748b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.emptyText {
+  font-size: 1rem;
+  color: #94a3b8;
+}
+
+/* 配對成功 Overlay */
+.matchOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(8, 7, 13, 0.96);
+  backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.matchSuccessCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  padding: 50px 40px;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  box-shadow: 0 0 60px rgba(167, 139, 250, 0.3);
+  animation: scaleUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.matchTitle {
+  font-size: 2.2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #a78bfa 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+.matchSubtitle {
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.matchBtn {
+  width: 100%;
+  background: linear-gradient(135deg, #a78bfa 0%, #10b981 100%);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.matchBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+}
+
+.closeMatchBtn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94a3b8;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.closeMatchBtn:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.loading {
+  color: #94a3b8;
+  font-size: 1.1rem;
+}

@@ -18,6 +18,7 @@ const io = new Server(server, {
 import prisma from './db';
 import userRoutes from './routes/userRoutes';
 import musicRoutes from './routes/musicRoutes';
+import matchRoutes from './routes/matchRoutes';
 
 const PORT = process.env.PORT || 4000;
 
@@ -27,6 +28,7 @@ app.use(express.json());
 // 註冊 API 路由
 app.use('/api/users', userRoutes);
 app.use('/api/music', musicRoutes);
+app.use('/api/matches', matchRoutes);
 
 // 基礎健康檢查路由
 app.get('/health', (req, res) => {

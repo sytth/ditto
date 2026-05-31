@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAudio } from './components/AudioProvider';
 import styles from './page.module.css';
+import { API_URL } from './config';
 
 interface Song {
   trackId: string;
@@ -51,7 +52,7 @@ export default function Home() {
     // 2. 獲取當前用戶生效的今日卡片
     const fetchCurrentCard = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/api/music/music-cards/current?userId=${currentUser.id}`);
+        const res = await fetch(`${API_URL}/api/music/music-cards/current?userId=${currentUser.id}`);
         
         if (res.status === 404) {
           // 沒有當前卡片，導向建立卡片頁
@@ -99,7 +100,25 @@ export default function Home() {
 
   // 進入配對頁 (第四階段實作)
   const handleStartMatch = () => {
-    alert('配對功能即將於「第四階段：品味推薦與滑動配對」實作，敬請期待！');
+    router.push('/match');
+  };
+
+  // 測試用：清除滑卡紀錄
+  const handleResetSwipes = async () => {
+    if (!user) return;
+    try {
+      const res = await fetch(`${API_URL}/api/users/${user.id}/swipes`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        alert('測試紀錄已清除，您可以重新配對所有人了！');
+      } else {
+        alert('清除失敗');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('清除失敗，伺服器無回應');
+    }
   };
 
   if (loading) {
@@ -115,7 +134,7 @@ export default function Home() {
           <div className={styles.logo}>Ditto</div>
           {user && (
             <div className={styles.userInfo}>
-              <span className={styles.userName}>👤 {user.name}</span>
+              <span className={styles.userName}>{user.name}</span>
               <button className={styles.logoutBtn} onClick={handleLogout}>
                 登出
               </button>
@@ -137,14 +156,19 @@ export default function Home() {
             {currentCard && (
               <div className={styles.dashboardCard}>
                 <div className={styles.sectionHeader}>
-                  <h2 className={styles.sectionTitle}>🎵 我的今日音樂卡片</h2>
-                  <button className={styles.recreateBtn} onClick={handleRecreateCard}>
-                    重建今日卡片
-                  </button>
+                  <h2 className={styles.sectionTitle}>我的今日音樂卡片</h2>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <button className={styles.recreateBtn} style={{ background: 'rgba(239, 68, 68, 0.2)', color: '#fca5a5' }} onClick={handleResetSwipes}>
+                      清除配對紀錄(測試)
+                    </button>
+                    <button className={styles.recreateBtn} onClick={handleRecreateCard}>
+                      重建今日卡片
+                    </button>
+                  </div>
                 </div>
                 
                 <h3 style={{ fontSize: '1.1rem', color: '#a78bfa', marginBottom: '20px', fontWeight: 700 }}>
-                  🌟 卡片名稱：{currentCard.cardName}
+                  卡片名稱：{currentCard.cardName}
                 </h3>
 
                 <div className={styles.songList}>
@@ -174,7 +198,7 @@ export default function Home() {
 
                         {/* 右側播放提示狀態 */}
                         {isCurrentPlaying && (
-                          <div className={styles.statusText}>🎵 播放中...</div>
+                          <div className={styles.statusText}>播放中...</div>
                         )}
                       </div>
                     );
@@ -211,7 +235,7 @@ export default function Home() {
             {/* 配對按鈕區 */}
             <div className={styles.lobbyAction}>
               <button className={styles.startMatchBtn} onClick={handleStartMatch}>
-                🔥 開始品味配對
+                開始品味配對
               </button>
               <p className={styles.statusText}>今日卡片已發佈，準備好開啟音樂之旅吧！</p>
             </div>

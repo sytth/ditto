@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAudio } from '../components/AudioProvider';
 import styles from './create-card.module.css';
+import { API_URL } from '../config';
 
 interface Song {
   trackId: string;
@@ -57,7 +58,7 @@ export default function CreateCard() {
     setError(null);
 
     try {
-      const res = await fetch(`http://localhost:4000/api/music/search?term=${encodeURIComponent(searchQuery)}`);
+      const res = await fetch(`${API_URL}/api/music/search?term=${encodeURIComponent(searchQuery)}`);
       if (!res.ok) {
         throw new Error('搜尋失敗，請稍後再試');
       }
@@ -105,7 +106,7 @@ export default function CreateCard() {
     setError(null);
 
     try {
-      const res = await fetch('http://localhost:4000/api/music/music-cards', {
+      const res = await fetch(`${API_URL}/api/music/music-cards`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -266,7 +267,7 @@ export default function CreateCard() {
                   onClick={handleSubmitCard}
                   disabled={submitting || selectedSongs.length !== 5}
                 >
-                  {submitting ? '卡片生成中...' : '✨ 生成我的音樂卡片'}
+                  {submitting ? '卡片生成中...' : '生成我的音樂卡片'}
                 </button>
               </>
             )}
@@ -278,7 +279,7 @@ export default function CreateCard() {
       {showSuccess && (
         <div className={styles.successOverlay}>
           <div className={styles.successCard}>
-            <div className={styles.successIcon}>🎉</div>
+            <div className={styles.successIcon}>✓</div>
             <h2 className={styles.successTitle}>卡片生成成功！</h2>
             <p className={styles.successText}>
               您的今日音樂卡片「{cardName}」已經發佈至雲端。<br />

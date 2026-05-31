@@ -4,7 +4,7 @@
   "description": "Backend server for Ditto",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npx prisma generate && tsc",
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "db:migrate": "prisma migrate dev",
