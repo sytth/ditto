@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAudio } from '../components/AudioProvider';
 import styles from './match.module.css';
 import { API_URL } from '../config';
@@ -200,16 +201,18 @@ export default function MatchLobby() {
           currentCandidate && (
             <>
               <div className={styles.cardContainer}>
-                <div 
+                <motion.div 
+                  key={currentCandidate.id}
                   className={styles.card}
-                  style={{
-                    transform: swiping === 'LIKE' 
-                      ? 'translateX(150px) rotate(15deg) scale(0.95)' 
-                      : swiping === 'SKIP' 
-                        ? 'translateX(-150px) rotate(-15deg) scale(0.95)' 
-                        : 'none',
-                    opacity: swiping ? 0 : 1
+                  initial={{ scale: 0.8, opacity: 0, y: 50 }}
+                  animate={{ 
+                    scale: swiping ? 0.9 : 1, 
+                    opacity: swiping ? 0 : 1, 
+                    x: swiping === 'LIKE' ? 300 : swiping === 'SKIP' ? -300 : 0,
+                    rotate: swiping === 'LIKE' ? 25 : swiping === 'SKIP' ? -25 : 0,
+                    y: 0 
                   }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                 >
                   {/* 契合度徽章 (無 Emoji) */}
                   <div className={styles.scoreBadge}>
@@ -265,7 +268,7 @@ export default function MatchLobby() {
                       <span key={g} className={styles.badge}>{g}</span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               {/* 滑卡操作按鈕 (自製 CSS 圖示，無 Emoji) */}
@@ -290,24 +293,36 @@ export default function MatchLobby() {
         )}
       </div>
 
-      {/* 配對成功全螢幕彈窗 Overlay (無 Emoji) */}
-      {showMatchOverlay && matchedUser && (
-        <div className={styles.matchOverlay}>
-          <div className={styles.matchSuccessCard}>
-            <h2 className={styles.matchTitle}>品味契合！</h2>
-            <p className={styles.matchSubtitle}>
-              您與 {matchedUser.name} 都對彼此的今日音樂卡片表示了喜歡。<br />
-              開啟一段 48 小時的限時品味對話吧！
-            </p>
-            <button className={styles.matchBtn} onClick={handleGoToChat}>
-              進入聊天室
-            </button>
-            <button className={styles.closeMatchBtn} onClick={() => setShowMatchOverlay(false)}>
-              繼續尋找同好
-            </button>
-          </div>
-        </div>
-      )}
+      {/* 配對成功全螢幕彈窗 Overlay */}
+      <AnimatePresence>
+        {showMatchOverlay && matchedUser && (
+          <motion.div 
+            className={styles.matchOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div 
+              className={styles.matchSuccessCard}
+              initial={{ scale: 0.5, y: 100, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              transition={{ type: 'spring', bounce: 0.6 }}
+            >
+              <h2 className={styles.matchTitle}>品味契合！</h2>
+              <p className={styles.matchSubtitle}>
+                您與 {matchedUser.name} 都對彼此的今日音樂卡片表示了喜歡。<br />
+                開啟一段 48 小時的限時品味對話吧！
+              </p>
+              <button className={styles.matchBtn} onClick={handleGoToChat}>
+                進入聊天室
+              </button>
+              <button className={styles.closeMatchBtn} onClick={() => setShowMatchOverlay(false)}>
+                繼續尋找同好
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -32,27 +32,6 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// 測試用：清除使用者的滑卡與配對紀錄
-router.delete('/:userId/swipes', async (req, res) => {
-  try {
-    const { userId } = req.params;
-    
-    // 刪除此用戶發出的滑卡紀錄
-    await prisma.swipe.deleteMany({
-      where: { userId },
-    });
-    
-    // 刪除此用戶參與的配對 (可選)
-    // await prisma.matchMember.deleteMany({
-    //   where: { userId }
-    // });
-
-    return res.status(200).json({ message: '測試滑卡紀錄已清除' });
-  } catch (error: any) {
-    console.error('清除紀錄出錯:', error);
-    return res.status(500).json({ error: '伺服器內部錯誤' });
-  }
-});
 
 // 更新用戶音樂喜好
 router.put('/:userId/preferences', async (req, res) => {

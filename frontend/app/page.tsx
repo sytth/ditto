@@ -103,23 +103,7 @@ export default function Home() {
     router.push('/match');
   };
 
-  // 測試用：清除滑卡紀錄
-  const handleResetSwipes = async () => {
-    if (!user) return;
-    try {
-      const res = await fetch(`${API_URL}/api/users/${user.id}/swipes`, {
-        method: 'DELETE',
-      });
-      if (res.ok) {
-        alert('測試紀錄已清除，您可以重新配對所有人了！');
-      } else {
-        alert('清除失敗');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('清除失敗，伺服器無回應');
-    }
-  };
+
 
   if (loading) {
     return <div className={styles.loading}>載入中...</div>;
@@ -163,9 +147,7 @@ export default function Home() {
                 <div className={styles.sectionHeader}>
                   <h2 className={styles.sectionTitle}>我的今日音樂卡片</h2>
                   <div style={{ display: 'flex', gap: '10px' }}>
-                    <button className={styles.recreateBtn} style={{ background: 'rgba(239, 68, 68, 0.2)', color: '#fca5a5' }} onClick={handleResetSwipes}>
-                      清除配對紀錄(測試)
-                    </button>
+
                     <button className={styles.recreateBtn} onClick={handleRecreateCard}>
                       重建今日卡片
                     </button>
