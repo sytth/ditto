@@ -39,6 +39,11 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'Ditto Backend is running' });
 });
 
+// Render 預設根目錄健康檢查
+app.get('/', (req, res) => {
+  res.json({ status: 'OK', message: 'Ditto Backend Root is running' });
+});
+
 // Socket.io 即時通訊事件處理
 io.on('connection', (socket) => {
   console.log(`使用者已連線: ${socket.id}`);
