@@ -69,7 +69,7 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(PORT, () => {
+server.listen(PORT as number, '0.0.0.0', () => {
   console.log(`伺服器正在 port ${PORT} 上運行...`);
 });
 export { prisma, io };
