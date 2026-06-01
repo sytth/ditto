@@ -7,11 +7,12 @@
 }
 
 .wrapper {
-  max-width: 1000px;
+  max-width: 480px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 .header {
@@ -36,14 +37,8 @@
 
 .mainGrid {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 30px;
-}
-
-@media (max-width: 768px) {
-  .mainGrid {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 .cardSection {
@@ -150,7 +145,6 @@
   border-radius: 8px;
   overflow: hidden;
   flex-shrink: 0;
-  cursor: pointer;
 }
 
 .cover {
@@ -188,18 +182,16 @@
   font-weight: 600;
   font-size: 0.95rem;
   color: #f1f5f9;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .artistName {
   font-size: 0.8rem;
   color: #94a3b8;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 2px;
+  white-space: normal;
+  word-break: break-word;
+  margin-top: 4px;
 }
 
 .actionBtn {

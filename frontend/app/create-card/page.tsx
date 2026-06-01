@@ -177,12 +177,16 @@ export default function CreateCard() {
                   const isAlreadySelected = selectedSongs.some((s) => s.trackId === song.trackId);
 
                   return (
-                    <div key={song.trackId} className={styles.songItem}>
+                    <div 
+                      key={song.trackId} 
+                      className={styles.songItem} 
+                      onClick={() => playTrack(song.previewUrl)}
+                      style={{ cursor: 'pointer' }}
+                    >
                       
                       {/* 專輯封面 + 播放點擊 */}
                       <div 
                         className={`${styles.coverWrapper} ${isCurrentPlaying ? styles.coverWrapperActive : ''}`}
-                        onClick={() => playTrack(song.previewUrl)}
                       >
                         {song.coverUrl && (
                           <img src={song.coverUrl} alt="cover" className={styles.cover} />
@@ -201,7 +205,7 @@ export default function CreateCard() {
                       {/* 加入按鈕 */}
                       <button
                         className={`${styles.actionBtn} ${isAlreadySelected ? styles.actionBtnDisabled : ''}`}
-                        onClick={() => addSong(song)}
+                        onClick={(e) => { e.stopPropagation(); addSong(song); }}
                         disabled={isAlreadySelected}
                         title={isAlreadySelected ? '已加入今日卡片' : '加入卡片'}
                       >
