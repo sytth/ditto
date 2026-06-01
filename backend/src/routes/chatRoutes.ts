@@ -63,10 +63,18 @@ router.get('/:matchId/messages', async (req, res) => {
     const match = await prisma.match.findUnique({
       where: { id: matchId },
       include: {
+        decisions: true,
         members: {
           include: {
             user: {
-              select: { id: true, name: true, avatar: true },
+              select: { 
+                id: true, 
+                name: true, 
+                avatar: true,
+                cards: {
+                  where: { isCurrent: true },
+                }
+              },
             },
           },
         },

@@ -49,6 +49,20 @@ io.on('connection', (socket) => {
     console.log(`使用者 ${socket.id} 加入房間 ${matchId}`);
   });
 
+  // 發出共聽邀請
+  socket.on('co_play:invite', (data) => {
+    socket.to(data.matchId).emit('co_play:invite', data);
+  });
+
+  // 接受共聽邀請
+  socket.on('co_play:accept', (data) => {
+    const serverStartTime = Date.now() + 2000; // 延遲 2 秒作為兩端緩衝
+    io.to(data.matchId).emit('co_play:start', {
+      song: data.song,
+      serverStartTime,
+    });
+  });
+
   // 斷線處理
   socket.on('disconnect', () => {
     console.log(`使用者已斷線: ${socket.id}`);

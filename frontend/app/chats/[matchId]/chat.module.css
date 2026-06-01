@@ -228,3 +228,338 @@
   color: #94a3b8;
   backdrop-filter: blur(5px);
 }
+
+/* Phase 6: Decision UI */
+.decisionPanel {
+  padding: 20px;
+  background: rgba(13, 11, 24, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.decisionBtnKeep {
+  flex: 1;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.decisionBtnKeep:hover {
+  background: rgba(16, 185, 129, 0.25);
+}
+
+.decisionBtnEnd {
+  flex: 1;
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.decisionBtnEnd:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+.decisionWaiting {
+  padding: 20px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  background: rgba(13, 11, 24, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Phase 6: Co-play */
+.coplayBtn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  padding: 8px 15px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.2s;
+}
+
+.coplayBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.inviteBanner {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inviteInfo {
+  font-size: 0.9rem;
+  color: #e2e8f0;
+}
+
+.inviteActions {
+  display: flex;
+  gap: 10px;
+}
+
+.acceptBtn {
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.rejectBtn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Modal */
+.modalOverlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.modalContent {
+  width: 100%;
+  background: #1e1b2e;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 20px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modalHeader h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.searchBar {
+  width: 100%;
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.songList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.songItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.songItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.songCover {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.songInfo {
+  flex: 1;
+}
+
+.songName {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.songArtist {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.playerBanner {
+  background: #1e1b2e;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.playerTop {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.playerCover {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+}
+
+.playerInfo {
+  flex: 1;
+}
+
+.playerStatus {
+  font-size: 0.75rem;
+  color: #10b981;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.externalLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.extLinksTitle {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.extLinksRow {
+  display: flex;
+  gap: 10px;
+}
+
+.extLink {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.extLink:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.minimizedPlayer {
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  background: #0d0b18;
+  border: 2px solid #fff;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  z-index: 20;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.minimizedPlayer:hover {
+  transform: scale(1.1);
+  background: #1e1b2e;
+}
+
+.musicBars {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 16px;
+}
+
+.bar {
+  width: 3px;
+  background-color: #fff;
+  border-radius: 2px;
+  animation: dance 1s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+.bar:nth-child(1) { height: 16px; animation-delay: 0.1s; }
+.bar:nth-child(2) { height: 10px; animation-delay: 0.3s; }
+.bar:nth-child(3) { height: 14px; animation-delay: 0.2s; }
+
+@keyframes dance {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+.playerDragBar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
+  cursor: pointer;
+}
+
+.dragHandle {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}

@@ -222,4 +222,72 @@ router.post('/swipe', async (req, res) => {
   }
 });
 
+/**
+ * 3. 雙盲結算提交 (POST /api/matches/:matchId/decision)
+ * Body: { userId, keep: boolean }
+ */
+router.post('/:matchId/decision', async (req, res) => {
+  const { matchId } = req.params;
+  const { userId, keep } = req.body;
+
+  if (!userId || typeof keep !== 'boolean') {
+    return res.status(400).json({ error: '必須提供 userId 與 keep(boolean)' });
+  }
+
+  try {
+    const match = await prisma.match.findUnique({
+      where: { id: matchId },
+      include: {
+        decisions: true
+      }
+    });
+
+    if (!match) return res.status(404).json({ error: '找不到配對紀錄' });
+
+    // 儲存決定
+    await prisma.matchDecision.upsert({
+      where: {
+        matchId_userId: { matchId, userId }
+      },
+      update: { keep },
+      create: { matchId, userId, keep }
+    });
+
+    // 重新取得最新決定列表
+    const updatedDecisions = await prisma.matchDecision.findMany({
+      where: { matchId }
+    });
+
+    let newStatus = match.status;
+
+    // 判斷是否雙方都已經提交
+    if (updatedDecisions.length === 2) {
+      const allKeep = updatedDecisions.every(d => d.keep === true);
+      
+      if (allKeep) {
+        newStatus = 'ACTIVE';
+        await prisma.match.update({
+          where: { id: matchId },
+          data: { status: 'ACTIVE' }
+        });
+        const io = req.app.get('io');
+        if (io) io.to(matchId).emit('match_unlocked', { matchId });
+      } else {
+        newStatus = 'ARCHIVED';
+        await prisma.match.update({
+          where: { id: matchId },
+          data: { status: 'ARCHIVED' }
+        });
+        const io = req.app.get('io');
+        if (io) io.to(matchId).emit('match_archived', { matchId });
+      }
+    }
+
+    return res.json({ status: newStatus });
+  } catch (err: any) {
+    console.error('提交決定出錯:', err);
+    return res.status(500).json({ error: '伺服器錯誤' });
+  }
+});
+
 export default router;

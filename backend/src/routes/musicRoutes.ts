@@ -39,6 +39,7 @@ router.get('/search', async (req, res) => {
           artistName: item.artistName,
           previewUrl: item.previewUrl,
           coverUrl,
+          trackViewUrl: item.trackViewUrl,
         };
       });
 
