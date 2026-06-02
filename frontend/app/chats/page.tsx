@@ -76,7 +76,7 @@ export default function ChatsList() {
       <div className={styles.wrapper}>
         
         <header className={styles.header}>
-          <h1 className={styles.title}>收件匣</h1>
+          <h1 className={styles.title}>好友列表</h1>
           <button className={styles.backBtn} onClick={() => router.push('/')}>
             回大廳
           </button>

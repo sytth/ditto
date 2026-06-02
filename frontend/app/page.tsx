@@ -118,7 +118,7 @@ export default function Home() {
           <div className={styles.logo}>Ditto</div>
           <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
             <button className={styles.backBtn} style={{ background: 'rgba(255, 255, 255, 0.1)', border: 'none', color: '#fff', padding: '8px 16px', borderRadius: '10px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 600 }} onClick={() => router.push('/chats')}>
-              收件匣 (Inbox)
+              好友列表
             </button>
             {user && (
               <div className={styles.userInfo}>

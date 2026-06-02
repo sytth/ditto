@@ -170,7 +170,7 @@ export default function MatchLobby() {
           <div className={styles.logo} onClick={handleGoBack}>Ditto</div>
           <div style={{ display: 'flex', gap: '10px' }}>
             <button className={styles.backBtn} onClick={() => router.push('/chats')}>
-              收件匣
+              好友列表
             </button>
             <button className={styles.backBtn} onClick={handleGoBack}>
               返回大廳
