@@ -353,6 +353,7 @@
 
 .modalContent {
   width: 100%;
+  max-width: 600px;
   background: #1e1b2e;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -562,4 +563,81 @@
   height: 4px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 2px;
+}
+
+/* Profile Modal */
+.profileContent {
+  width: 100%;
+  max-width: 600px;
+  background: #1e1b2e;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 20px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.profileAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6 0%, #a855f7 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0 auto 15px auto;
+}
+
+.profileName {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.profileMeta {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.profileSection {
+  margin-bottom: 20px;
+}
+
+.profileSectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #a78bfa;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 5px;
+}
+
+.profileText {
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.profileTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.profileBadge {
+  background: rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  color: #e2e8f0;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
 }

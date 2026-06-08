@@ -15,6 +15,10 @@ model User {
   email        String        @unique
   name         String
   avatar       String?       // 頭像 URL
+  location     String?       // 地點 (ex. 台北, 花蓮)
+  age          Int?          // 年齡
+  zodiac       String?       // 星座
+  bio          String?       // 自我介紹
   genres       String[]      // 註冊時勾選的愛好曲風標籤 (例如: ["Indie", "Pop", "Jazz"])
   artists      String[]      // 註冊時填寫的愛好歌手/樂團 (例如: ["Deca Joins", "伍佰"])
   createdAt    DateTime      @default(now())

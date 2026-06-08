@@ -11,6 +11,12 @@ interface User {
   id: string;
   name: string;
   avatar: string | null;
+  location?: string | null;
+  age?: number | null;
+  zodiac?: string | null;
+  bio?: string | null;
+  genres?: string[];
+  artists?: string[];
   cards?: { songs: any }[];
 }
 
@@ -57,6 +63,7 @@ export default function ChatRoom({ params }: { params: Promise<{ matchId: string
   const [hasDecided, setHasDecided] = useState(false);
 
   const [showCoplayModal, setShowCoplayModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
   const [recommendedSongs, setRecommendedSongs] = useState<SongItem[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SongItem[]>([]);
@@ -300,11 +307,11 @@ export default function ChatRoom({ params }: { params: Promise<{ matchId: string
         <header className={styles.header}>
           <div className={styles.headerInfo}>
             <button className={styles.backBtn} onClick={() => router.push('/chats')}>←</button>
-            <div className={styles.avatar}>
+            <div className={styles.avatar} onClick={() => setShowProfileModal(true)} style={{ cursor: 'pointer' }}>
               {otherUser?.name.charAt(0).toUpperCase() || '?'}
             </div>
-            <div className={styles.nameInfo}>
-              <div className={styles.name}>{otherUser?.name}</div>
+            <div className={styles.nameInfo} onClick={() => setShowProfileModal(true)} style={{ cursor: 'pointer' }}>
+              <div className={styles.name}>{otherUser?.name} <span style={{ fontSize: '0.8rem', marginLeft: '5px' }}>ℹ️</span></div>
               <div className={styles.status}>在線</div>
             </div>
           </div>
@@ -455,6 +462,56 @@ export default function ChatRoom({ params }: { params: Promise<{ matchId: string
                 <div style={{textAlign: 'center', color: '#94a3b8'}}>無推薦歌曲</div>
               )}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Profile Modal */}
+      {showProfileModal && otherUser && (
+        <div className={styles.modalOverlay} onClick={() => setShowProfileModal(false)}>
+          <div className={styles.profileContent} onClick={e => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h2>對方檔案</h2>
+              <button className={styles.closeBtn} onClick={() => setShowProfileModal(false)}>×</button>
+            </div>
+            
+            <div className={styles.profileAvatar}>
+              {otherUser.name.charAt(0).toUpperCase()}
+            </div>
+            
+            <div className={styles.profileName}>{otherUser.name}</div>
+            <div className={styles.profileMeta}>
+              {[otherUser.age ? `${otherUser.age}歲` : null, otherUser.location, otherUser.zodiac].filter(Boolean).join(' • ')}
+            </div>
+
+            {otherUser.bio && (
+              <div className={styles.profileSection}>
+                <div className={styles.profileSectionTitle}>關於我</div>
+                <div className={styles.profileText}>{otherUser.bio}</div>
+              </div>
+            )}
+
+            {otherUser.genres && otherUser.genres.length > 0 && (
+              <div className={styles.profileSection}>
+                <div className={styles.profileSectionTitle}>喜歡的曲風</div>
+                <div className={styles.profileTags}>
+                  {otherUser.genres.map(g => (
+                    <span key={g} className={styles.profileBadge}>{g}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {otherUser.artists && otherUser.artists.length > 0 && (
+              <div className={styles.profileSection}>
+                <div className={styles.profileSectionTitle}>最愛的歌手/樂團</div>
+                <div className={styles.profileTags}>
+                  {otherUser.artists.map(a => (
+                    <span key={a} className={styles.profileBadge} style={{ borderColor: 'rgba(244, 114, 182, 0.3)', background: 'rgba(244, 114, 182, 0.1)' }}>{a}</span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}

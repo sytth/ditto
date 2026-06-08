@@ -71,6 +71,12 @@
   box-shadow: 0 0 15px rgba(167, 139, 250, 0.15);
 }
 
+.input option {
+  background: rgba(13, 12, 21, 0.95);
+  color: #ffffff;
+  padding: 10px;
+}
+
 .genreGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -71,6 +71,12 @@ router.get('/:matchId/messages', async (req, res) => {
                 id: true, 
                 name: true, 
                 avatar: true,
+                location: true,
+                age: true,
+                zodiac: true,
+                bio: true,
+                genres: true,
+                artists: true,
                 cards: {
                   where: { isCurrent: true },
                 }
